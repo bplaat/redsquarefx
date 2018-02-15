@@ -1,0 +1,1 @@
+public enum Page { HOME, GAME, HIGHSCORE, HELP, SETTINGS, CREDITS, EXIT };
