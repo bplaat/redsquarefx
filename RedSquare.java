@@ -9,6 +9,7 @@ public class RedSquare extends Rectangle {
     RedSquare (int x, int y, int width, int height) {
         super(x, y, width, height);
         setFill(Color.rgb(255, 0, 0, 0.8));
+        setStroke(Color.RED);
 
         setOnMousePressed(new EventHandler<MouseEvent> () {
             public void handle (MouseEvent e) {

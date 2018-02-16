@@ -2,6 +2,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class Factory {
     public static Button getButton (String text, Page page, int x, int y, int width, int height) {
@@ -25,5 +27,12 @@ public class Factory {
         label.setLayoutY(y);
         label.setStyle("-fx-font-size: " + fontSize + "px; -fx-text-fill: white;");
         return label;
+    }
+
+    public static Rectangle getBorder (int borderSize) {
+        Rectangle border = new Rectangle(borderSize, borderSize, 640 - borderSize * 2, 480 - borderSize * 2);
+        border.setFill(Color.rgb(255, 255, 255, 0.5));
+        border.setStroke(Color.WHITE);
+        return border;
     }
 }
