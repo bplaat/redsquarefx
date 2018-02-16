@@ -16,13 +16,9 @@ public class GamePage extends Pane {
         formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         Label scoreLabel = Factory.getLabel("Score: " + score, 24, 10, 10);
-        getChildren().add(scoreLabel);
-
         Label timeLabel = Factory.getLabel("Time: " + formatter.format(0), 24, 200, 10);
-        getChildren().add(timeLabel);
-
         Label levelLabel = Factory.getLabel("Level: " + level, 24, 400, 10);
-        getChildren().add(levelLabel);
+        getChildren().addAll(scoreLabel, timeLabel, levelLabel);
 
         getChildren().add(Factory.getButton("Back", Page.HOME, 10, 420, 200, 50));
 
@@ -46,7 +42,7 @@ public class GamePage extends Pane {
                 Date current = new Date();
                 timeLabel.setText(formatter.format(current.getTime() - startTime.getTime()));
 
-                if ((current.getTime() - levelTime.getTime()) > 5 * 1000) {
+                if (current.getTime() - levelTime.getTime() > 5 * 1000) {
                     levelTime = new Date();
                     levelLabel.setText("Level: " + ++level);
                     blue1.setStep(level);

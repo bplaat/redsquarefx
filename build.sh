@@ -1,4 +1,4 @@
 javac -Xlint *.java
-jar cfe RedSquare.jar Main *.class
+jar cfe RedSquareFX.jar Main *.class
 rm *.class
-java -jar RedSquare.jar
+java -jar RedSquareFX.jar
