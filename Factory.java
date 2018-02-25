@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
@@ -22,17 +23,23 @@ public class Factory {
     }
 
     public static Label getLabel (String text, int fontSize, int x, int y) {
+        return getLabel(text, fontSize, x, y, -1, Pos.BASELINE_LEFT);
+    }
+
+    public static Label getLabel (String text, int fontSize, int x, int y, int width, Pos alignment) {
         Label label = new Label(text);
         label.setLayoutX(x);
         label.setLayoutY(y);
+        if (width != -1) label.setPrefWidth(width);
+        label.setAlignment(alignment);
         label.setStyle("-fx-font-size: " + fontSize + "px; -fx-text-fill: white;");
         return label;
     }
 
-    public static Rectangle getBorder (int borderSize) {
-        Rectangle border = new Rectangle(borderSize, borderSize, 640 - borderSize * 2, 480 - borderSize * 2);
-        border.setFill(Color.rgb(255, 255, 255, 0.5));
-        border.setStroke(Color.WHITE);
-        return border;
+    public static Rectangle getRectangle (int x, int y, int width, int height, Color color, Color stroke) {
+        Rectangle rectangle = new Rectangle(x, y, width, height);
+        rectangle.setFill(color);
+        if (stroke != null) rectangle.setStroke(stroke);
+        return rectangle;
     }
 }

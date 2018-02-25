@@ -5,6 +5,8 @@ public class Main extends Application {
     public void start (Stage primaryStage) {
         primaryStage.setTitle("RedSquareFX");
         primaryStage.setScene(Navigator.getScene());
+        primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
         primaryStage.show();
     }
 }
