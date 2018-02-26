@@ -13,7 +13,6 @@ public class Factory {
         button.setLayoutY(y);
         button.setPrefWidth(width);
         button.setPrefHeight(height);
-        button.setStyle("-fx-font-size: 18px;");
         button.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 Navigator.goTo(page);
@@ -22,24 +21,31 @@ public class Factory {
         return button;
     }
 
-    public static Label getLabel (String text, int fontSize, int x, int y) {
-        return getLabel(text, fontSize, x, y, -1, Pos.BASELINE_LEFT);
+    public static Label getLabel (String text, int x, int y) {
+        return getLabel(text, x, y, null, -1, null);
     }
 
-    public static Label getLabel (String text, int fontSize, int x, int y, int width, Pos alignment) {
+    public static Label getLabel (String text, int x, int y, String style) {
+        return getLabel(text, x, y, style, -1, null);
+    }
+
+    public static Label getLabel (String text, int x, int y, int width, Pos alignment) {
+        return getLabel(text, x, y, null, width, alignment);
+    }
+
+    public static Label getLabel (String text, int x, int y, String style, int width, Pos alignment) {
         Label label = new Label(text);
         label.setLayoutX(x);
         label.setLayoutY(y);
+        if (style != null) label.getStyleClass().add(style);
         if (width != -1) label.setPrefWidth(width);
-        label.setAlignment(alignment);
-        label.setStyle("-fx-font-size: " + fontSize + "px; -fx-text-fill: white;");
+        if (alignment != null) label.setAlignment(alignment);
         return label;
     }
-
-    public static Rectangle getRectangle (int x, int y, int width, int height, Color color, Color stroke) {
+    
+    public static Rectangle getRectangle (int x, int y, int width, int height, Color color) {
         Rectangle rectangle = new Rectangle(x, y, width, height);
         rectangle.setFill(color);
-        if (stroke != null) rectangle.setStroke(stroke);
         return rectangle;
     }
 }

@@ -1,9 +1,11 @@
+import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 
 public class HighScorePage extends Pane {
     HighScorePage () {
-        setStyle("-fx-background-color: #088;");
-        getChildren().add(Factory.getLabel("High Score", 32,   10, 1 * 10 + 0 * 50));
-        getChildren().add(Factory.getButton("Back", Page.HOME, 10, 2 * 10 + 1 * 50, 200, 50));
+        getChildren().addAll(
+            Factory.getLabel("High Score", 0, 20, "title", 640, Pos.BASELINE_CENTER),
+            Factory.getButton("Back", Page.HOME, (640 - 200) / 2, 410, 200, 50)
+        );
     }
 }

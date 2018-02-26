@@ -20,23 +20,15 @@ public class GamePage extends Pane {
     private RedSquare red;
     private BlueSquare blue1, blue2, blue3, blue4;
 
-    private boolean collisionDetection () {
-	    return red.getX() < borderSize || red.getX() + red.getWidth() > 640 - borderSize ||
-            red.getY() < borderSize || red.getY() + red.getHeight() > 480 - borderSize ||
-            blue1.collision(red) || blue2.collision(red) || blue3.collision(red) || blue4.collision(red);
-    }
-
     GamePage () {
-        setStyle("-fx-background-color: #29f;");
-
         dateFormatter = new SimpleDateFormat("HH:mm:ss");
         dateFormatter.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         getChildren().addAll(
-            scoreLabel = Factory.getLabel("Score: " + score, 20, borderSize, 8),
-            timeLabel = Factory.getLabel("Time: " + dateFormatter.format(0), 20, borderSize, 8, 640 - borderSize * 2, Pos.BOTTOM_CENTER),
-            levelLabel = Factory.getLabel("Level: " + level, 20, borderSize, 8, 640 - borderSize * 2, Pos.BASELINE_RIGHT),
-            border = Factory.getRectangle(borderSize, borderSize, 640 - borderSize * 2, 480 - borderSize * 2, Color.rgb(255, 255, 255, 0.5), Color.WHITE),
+            scoreLabel = Factory.getLabel("Score: " + score, borderSize, 10),
+            timeLabel = Factory.getLabel("Time: " + dateFormatter.format(0), borderSize, 10, 640 - borderSize * 2, Pos.BOTTOM_CENTER),
+            levelLabel = Factory.getLabel("Level: " + level, borderSize, 10, 640 - borderSize * 2, Pos.BASELINE_RIGHT),
+            border = Factory.getRectangle(borderSize, borderSize, 640 - borderSize * 2, 480 - borderSize * 2, Color.rgb(255, 255, 255, 0.3)),
 
             red = new RedSquare((640 - 50) / 2, (480 - 50) / 2, 50, 50),
             blue1 = new BlueSquare(0, 0, 75, 100, 1, 1),
@@ -55,7 +47,8 @@ public class GamePage extends Pane {
 
                 if (current.getTime() - levelTime.getTime() > 10 * 1000) {
                     levelTime = new Date();
-                    levelLabel.setText("Level: " + (++level));
+                    level += 1;
+                    levelLabel.setText("Level: " + level);
                 }
 
                 blue1.move(level);
@@ -74,14 +67,20 @@ public class GamePage extends Pane {
         timer.start();
     }
 
+    private boolean collisionDetection () {
+	    return red.getX() < borderSize || red.getX() + red.getWidth() > 640 - borderSize ||
+            red.getY() < borderSize || red.getY() + red.getHeight() > 480 - borderSize ||
+            blue1.collision(red) || blue2.collision(red) || blue3.collision(red) || blue4.collision(red);
+    }
+
     private void gameover () {
         getChildren().addAll(
-            Factory.getRectangle(0, 0, 640, 480, Color.rgb(0, 0, 0, 0.8), null),
-            Factory.getLabel("Game Over", 48, 0, 0, 640, Pos.BASELINE_CENTER),
-            Factory.getLabel(scoreLabel.getText(), 24, 0, 75, 640, Pos.BASELINE_CENTER),
-            Factory.getLabel(timeLabel.getText(), 24, 0, 125, 640, Pos.BASELINE_CENTER),
-            Factory.getLabel(levelLabel.getText(), 24, 0, 175, 640, Pos.BASELINE_CENTER),
-            Factory.getButton("Back", Page.HOME, (640 - 200) / 2, 225, 200, 50)
+            Factory.getRectangle(0, 0, 640, 480, Color.rgb(0, 0, 0, 0.8)),
+            Factory.getLabel("Game Over", 0, 115, "title", 640, Pos.BASELINE_CENTER),
+            Factory.getLabel(scoreLabel.getText(), 0, 175, 640, Pos.BASELINE_CENTER),
+            Factory.getLabel(timeLabel.getText(), 0, 225, 640, Pos.BASELINE_CENTER),
+            Factory.getLabel(levelLabel.getText(), 0, 275, 640, Pos.BASELINE_CENTER),
+            Factory.getButton("Back", Page.HOME, (640 - 200) / 2, 325, 200, 50)
         );
     }
 }

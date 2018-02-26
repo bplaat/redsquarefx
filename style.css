@@ -1,0 +1,19 @@
+.root {
+    -fx-background-image: url(bg.jpg);
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.button, .label {
+    -fx-font-size: 18px;
+}
+
+.title {
+    -fx-font-size: 32px;
+}
+
+.title, .subtitle {
+    -fx-font-weight: bold;
+}

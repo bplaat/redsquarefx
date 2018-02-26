@@ -5,7 +5,9 @@ public class Navigator {
     private static Scene scene;
 
     public static Scene getScene () {
-        return scene = new Scene(new HomePage(), 640, 480);
+        scene = new Scene(new HomePage(), 640, 480);
+        scene.getStylesheets().add("style.css");
+        return scene;
     }
 
     public static void goTo (Page page) {

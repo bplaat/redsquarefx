@@ -7,7 +7,6 @@ public class BlueSquare extends Rectangle {
     BlueSquare (int x, int y, int width, int height, int dx, int dy) {
         super(x, y, width, height);
         setFill(Color.rgb(0, 0, 255, 0.8));
-        setStroke(Color.BLUE);
         this.dx = dx;
         this.dy = dy;
     }
