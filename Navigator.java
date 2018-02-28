@@ -6,7 +6,9 @@ import javafx.scene.layout.StackPane;
 
 public class Navigator {
     private static StackPane container;
+
     private static double scale;
+    public static double getScale () { return scale; }
 
     public static Scene getScene () {
         container = new StackPane(new HomePage());
@@ -29,12 +31,12 @@ public class Navigator {
         scene.heightProperty().addListener(sceneSizeListener); 
         return scene;
     }
-
-    public static double getScale () { return scale; }
-
+    
     public static void changePage (Page page) {
         if (page == Page.HOME) container.getChildren().setAll(new HomePage());
         if (page == Page.GAME) container.getChildren().setAll(new GamePage());
+        if (page == Page.HIGHSCORE) container.getChildren().setAll(new HighScorePage());
+        if (page == Page.SETTINGS) container.getChildren().setAll(new SettingsPage());
         if (page == Page.HELP) container.getChildren().setAll(new HelpPage());
         if (page == Page.CREDITS) container.getChildren().setAll(new CreditsPage());
         if (page == Page.EXIT) Platform.exit();

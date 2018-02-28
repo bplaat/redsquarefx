@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -19,7 +18,8 @@ public class GamePage extends Pane {
     private Label scoreLabel, timeLabel, levelLabel;
     private RedSquare red;
     private BlueSquare blue1, blue2, blue3, blue4;
-    
+    private AnimationTimer timer;
+
     GamePage () {
         dateFormatter = new SimpleDateFormat("HH:mm:ss");
         dateFormatter.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -50,7 +50,7 @@ public class GamePage extends Pane {
             blue4 = new BlueSquare(640 - 100, 480 - 150, 100, 150, -1, -1)
         );
 
-        AnimationTimer timer = new AnimationTimer() {
+        timer = new AnimationTimer() {
             public void handle (long now) {
                 score += level;
                 scoreLabel.setText("Score: " + score);
@@ -69,10 +69,7 @@ public class GamePage extends Pane {
                 blue3.move(level);
                 blue4.move(level);
 
-                if (collisionDetection()) {
-                    stop();
-                    gameover();
-                }
+                if (collisionDetection()) gameover();
             }
         };
         startTime = levelTime = new Date();
@@ -86,6 +83,8 @@ public class GamePage extends Pane {
     }
 
     private void gameover () {
+        timer.stop();
+        red.gameover();
         VBox container = new VBox(20);
         container.setPrefSize(640, 480);
         container.getStyleClass().add("gameover");

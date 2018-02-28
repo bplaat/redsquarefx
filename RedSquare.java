@@ -5,6 +5,9 @@ import javafx.scene.shape.Rectangle;
 public class RedSquare extends Rectangle {
     private double offsetX, offsetY;
 
+    private boolean gameover = false;
+    public void gameover () { this.gameover = true; }
+
     RedSquare (int x, int y, int width, int height) {
         super(x, y, width, height);
         getStyleClass().add("red");
@@ -18,8 +21,10 @@ public class RedSquare extends Rectangle {
 
         setOnMouseDragged(new EventHandler<MouseEvent> () {
             public void handle (MouseEvent event) {
-                setX(event.getSceneX() / Navigator.getScale() - offsetX);
-                setY(event.getSceneY() / Navigator.getScale() - offsetY);
+                if (!gameover) {
+                    setX(event.getSceneX() / Navigator.getScale() - offsetX);
+                    setY(event.getSceneY() / Navigator.getScale() - offsetY);
+                }
             }
         });
     }

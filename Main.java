@@ -6,5 +6,8 @@ public class Main extends Application {
         stage.setTitle("RedSquareFX");
         stage.setScene(Navigator.getScene());
         stage.show();
+
+
+        System.out.println(Cloud.get("https://service.plaatsoft.nl/"));
     }
 }
