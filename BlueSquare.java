@@ -1,4 +1,3 @@
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class BlueSquare extends Rectangle {
@@ -6,20 +5,20 @@ public class BlueSquare extends Rectangle {
 
     BlueSquare (int x, int y, int width, int height, int dx, int dy) {
         super(x, y, width, height);
-        setFill(Color.rgb(0, 0, 255, 0.8));
+        getStyleClass().add("blue");
         this.dx = dx;
         this.dy = dy;
     }
 
-    public void move (int level) {
+    public void move (int speed) {
         if (getX() < 0 || getX() + getWidth() > 640) dx = -dx;
-        setX(getX() + dx * level);
+        setX(getX() + dx * speed);
         if (getY() < 0 || getY() + getHeight() > 480) dy = -dy;
-        setY(getY() + dy * level);
+        setY(getY() + dy * speed);
     }
 
-    public boolean collision (RedSquare red) {
-        return red.getX() < getX() + getWidth() && red.getX() + red.getWidth() > getX() &&
-            red.getY() < getY() + getHeight() && red.getY() + red.getHeight() > getY();
+    public boolean collision (Rectangle other) {
+        return other.getX() < getX() + getWidth() && other.getX() + other.getWidth() > getX() &&
+        other.getY() < getY() + getHeight() && other.getY() + other.getHeight() > getY();
     }
 }

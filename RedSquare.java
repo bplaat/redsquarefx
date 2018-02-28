@@ -1,26 +1,25 @@
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class RedSquare extends Rectangle {
-    private int offsetX, offsetY;
+    private double offsetX, offsetY;
 
     RedSquare (int x, int y, int width, int height) {
         super(x, y, width, height);
-        setFill(Color.rgb(255, 0, 0, 0.8));
+        getStyleClass().add("red");
 
         setOnMousePressed(new EventHandler<MouseEvent> () {
-            public void handle (MouseEvent e) {
-                offsetX = (int)e.getSceneX() - (int)getX();
-                offsetY = (int)e.getSceneY() - (int)getY();
+            public void handle (MouseEvent event) {
+                offsetX = (int)event.getSceneX() / Navigator.getScale() - (int)getX();
+                offsetY = (int)event.getSceneY() / Navigator.getScale() - (int)getY();
             }
         });
 
         setOnMouseDragged(new EventHandler<MouseEvent> () {
-            public void handle (MouseEvent e) {
-                setX(e.getSceneX() - offsetX);
-                setY(e.getSceneY() - offsetY);
+            public void handle (MouseEvent event) {
+                setX(event.getSceneX() / Navigator.getScale() - offsetX);
+                setY(event.getSceneY() / Navigator.getScale() - offsetY);
             }
         });
     }

@@ -1,17 +1,19 @@
 import javafx.geometry.Pos;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-public class HelpPage extends Pane {
+public class HelpPage extends VBox {
     HelpPage () {
+        setSpacing(20);
+        setAlignment(Pos.CENTER);
         getChildren().addAll(
-            Factory.getLabel("Help", 0, 20, "title", 640, Pos.BASELINE_CENTER),
-            Factory.getLabel("RedSquareFX is an classic 2D action game.", 0, 90, 640, Pos.BASELINE_CENTER),
-            Factory.getLabel("Click and hold the red square.", 0, 130, 640, Pos.BASELINE_CENTER),
-            Factory.getLabel("Now move so that you neither touch the wall", 0, 170, 640, Pos.BASELINE_CENTER),
-            Factory.getLabel("nor get hit by any of the blue squares.", 0, 210, 640, Pos.BASELINE_CENTER),
-            Factory.getLabel("If you make it to 40 seconds, you are doing.", 0, 250, 640, Pos.BASELINE_CENTER),
-            Factory.getLabel("brilliantly!", 0, 290, 640, Pos.BASELINE_CENTER),
-            Factory.getButton("Back", Page.HOME, (640 - 200) / 2, 410, 200, 50)
+            Factory.getTitle("Help"),
+            Factory.getLabel("RedSquareFX is an classic 2D action game."),
+            Factory.getLabel("Click and hold the red square."),
+            Factory.getLabel("Now move so that you neither touch the wall"),
+            Factory.getLabel("nor get hit by any of the blue squares."),
+            Factory.getLabel("If you make it to 40 seconds, you are doing"),
+            Factory.getLabel("it brilliantly!"),
+            Factory.getButton("Back", Page.HOME)
         );
     }
 }

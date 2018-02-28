@@ -2,11 +2,9 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    public void start (Stage primaryStage) {
-        primaryStage.setTitle("RedSquareFX");
-        primaryStage.setScene(Navigator.getScene());
-        primaryStage.setResizable(false);
-        primaryStage.sizeToScene();
-        primaryStage.show();
+    public void start (Stage stage) {
+        stage.setTitle("RedSquareFX");
+        stage.setScene(Navigator.getScene());
+        stage.show();
     }
 }

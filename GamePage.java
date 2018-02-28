@@ -2,34 +2,47 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
 public class GamePage extends Pane {
     private SimpleDateFormat dateFormatter;
-
     private Date startTime, levelTime;
-    private int borderSize = 50, score = 0, level = 1;
-
+    private int score = 0, level = 1, borderSize = 50;
     private Label scoreLabel, timeLabel, levelLabel;
-    private Rectangle border;
-
     private RedSquare red;
     private BlueSquare blue1, blue2, blue3, blue4;
-
+    
     GamePage () {
         dateFormatter = new SimpleDateFormat("HH:mm:ss");
         dateFormatter.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-        getChildren().addAll(
-            scoreLabel = Factory.getLabel("Score: " + score, borderSize, 10),
-            timeLabel = Factory.getLabel("Time: " + dateFormatter.format(0), borderSize, 10, 640 - borderSize * 2, Pos.BOTTOM_CENTER),
-            levelLabel = Factory.getLabel("Level: " + level, borderSize, 10, 640 - borderSize * 2, Pos.BASELINE_RIGHT),
-            border = Factory.getRectangle(borderSize, borderSize, 640 - borderSize * 2, 480 - borderSize * 2, Color.rgb(255, 255, 255, 0.3)),
+        HBox container = new HBox();
+        container.setPadding(new Insets(10, 50, 10, 50));
+        container.setPrefWidth(640);
 
+        container.getChildren().addAll(
+            scoreLabel = Factory.getLabel("Score: " + score),
+            timeLabel = Factory.getLabel("Time: " + dateFormatter.format(0)),
+            levelLabel = Factory.getLabel("Level: " + level)
+        );
+
+        timeLabel.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(timeLabel, Priority.ALWAYS);
+        timeLabel.setAlignment(Pos.CENTER);
+
+        Rectangle border = new Rectangle(borderSize, borderSize, 640 - borderSize * 2, 480 - borderSize * 2);
+        border.getStyleClass().add("border");
+
+        getChildren().addAll(
+            container, border,
             red = new RedSquare((640 - 50) / 2, (480 - 50) / 2, 50, 50),
             blue1 = new BlueSquare(0, 0, 75, 100, 1, 1),
             blue2 = new BlueSquare(640 - 150, 0, 150, 75, -1, 1),
@@ -62,7 +75,6 @@ public class GamePage extends Pane {
                 }
             }
         };
-
         startTime = levelTime = new Date();
         timer.start();
     }
@@ -74,13 +86,17 @@ public class GamePage extends Pane {
     }
 
     private void gameover () {
-        getChildren().addAll(
-            Factory.getRectangle(0, 0, 640, 480, Color.rgb(0, 0, 0, 0.8)),
-            Factory.getLabel("Game Over", 0, 115, "title", 640, Pos.BASELINE_CENTER),
-            Factory.getLabel(scoreLabel.getText(), 0, 175, 640, Pos.BASELINE_CENTER),
-            Factory.getLabel(timeLabel.getText(), 0, 225, 640, Pos.BASELINE_CENTER),
-            Factory.getLabel(levelLabel.getText(), 0, 275, 640, Pos.BASELINE_CENTER),
-            Factory.getButton("Back", Page.HOME, (640 - 200) / 2, 325, 200, 50)
+        VBox container = new VBox(20);
+        container.setPrefSize(640, 480);
+        container.getStyleClass().add("gameover");
+        container.setAlignment(Pos.CENTER);
+        container.getChildren().addAll(
+            Factory.getTitle("Game Over"),
+            Factory.getLabel(scoreLabel.getText()),
+            Factory.getLabel(timeLabel.getText()),
+            Factory.getLabel(levelLabel.getText()),
+            Factory.getButton("Back", Page.HOME)
         );
+        getChildren().add(container);
     }
 }

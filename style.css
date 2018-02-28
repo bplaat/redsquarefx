@@ -1,4 +1,9 @@
 .root {
+    -fx-background-color: black;
+    -fx-font-size: 18px;
+}
+
+.container {
     -fx-background-image: url(bg.jpg);
 }
 
@@ -6,14 +11,26 @@
     -fx-text-fill: white;
 }
 
-.button, .label {
-    -fx-font-size: 18px;
-}
-
 .title {
     -fx-font-size: 32px;
 }
 
-.title, .subtitle {
+.subtitle {
     -fx-font-weight: bold;
+}
+
+.blue {
+    -fx-fill: rgba(0, 0, 255, 0.8);
+}
+
+.red {
+    -fx-fill: rgba(255, 0, 0, 0.8);
+}
+
+.border {
+    -fx-fill: rgba(255, 255, 255, 0.5);
+}
+
+.gameover {
+    -fx-background-color: rgba(0, 0, 0, 0.8);
 }
