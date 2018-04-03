@@ -7,6 +7,7 @@ public class SettingsPage extends VBox {
         setAlignment(Pos.CENTER);
         getChildren().addAll(
             Factory.getTitle("Settings"),
+            Factory.getLabel("Comming soon..."),
             Factory.getButton("Back", Page.HOME)
         );
     }

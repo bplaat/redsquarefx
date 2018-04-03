@@ -7,6 +7,7 @@ public class HighScorePage extends VBox {
         setAlignment(Pos.CENTER);
         getChildren().addAll(
             Factory.getTitle("High Score"),
+            Factory.getLabel("Comming soon..."),
             Factory.getButton("Back", Page.HOME)
         );
     }
